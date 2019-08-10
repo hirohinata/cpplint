@@ -342,9 +342,9 @@ statement
    ;
 
 labeledstatement
-   : attributespecifierseq? Identifier ':' statement
-   | attributespecifierseq? Case constantexpression ':' statement
-   | attributespecifierseq? Default ':' statement
+   : attributespecifierseq? Identifier ':' statement                #gotostatement
+   | attributespecifierseq? Case constantexpression ':' statement   #casestatement
+   | attributespecifierseq? Default ':' statement                   #defaultstatement
    ;
 
 expressionstatement

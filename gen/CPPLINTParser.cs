@@ -4325,6 +4325,18 @@ public partial class CPPLINTParser : Parser {
 	}
 
 	public partial class LabeledstatementContext : ParserRuleContext {
+		public LabeledstatementContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_labeledstatement; } }
+	 
+		public LabeledstatementContext() { }
+		public virtual void CopyFrom(LabeledstatementContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class GotostatementContext : LabeledstatementContext {
 		public ITerminalNode Identifier() { return GetToken(CPPLINTParser.Identifier, 0); }
 		public ITerminalNode Colon() { return GetToken(CPPLINTParser.Colon, 0); }
 		public StatementContext statement() {
@@ -4333,23 +4345,55 @@ public partial class CPPLINTParser : Parser {
 		public AttributespecifierseqContext attributespecifierseq() {
 			return GetRuleContext<AttributespecifierseqContext>(0);
 		}
+		public GotostatementContext(LabeledstatementContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICPPLINTListener typedListener = listener as ICPPLINTListener;
+			if (typedListener != null) typedListener.EnterGotostatement(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICPPLINTListener typedListener = listener as ICPPLINTListener;
+			if (typedListener != null) typedListener.ExitGotostatement(this);
+		}
+	}
+	public partial class CasestatementContext : LabeledstatementContext {
 		public ITerminalNode Case() { return GetToken(CPPLINTParser.Case, 0); }
 		public ConstantexpressionContext constantexpression() {
 			return GetRuleContext<ConstantexpressionContext>(0);
 		}
-		public ITerminalNode Default() { return GetToken(CPPLINTParser.Default, 0); }
-		public LabeledstatementContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
+		public ITerminalNode Colon() { return GetToken(CPPLINTParser.Colon, 0); }
+		public StatementContext statement() {
+			return GetRuleContext<StatementContext>(0);
 		}
-		public override int RuleIndex { get { return RULE_labeledstatement; } }
+		public AttributespecifierseqContext attributespecifierseq() {
+			return GetRuleContext<AttributespecifierseqContext>(0);
+		}
+		public CasestatementContext(LabeledstatementContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICPPLINTListener typedListener = listener as ICPPLINTListener;
-			if (typedListener != null) typedListener.EnterLabeledstatement(this);
+			if (typedListener != null) typedListener.EnterCasestatement(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			ICPPLINTListener typedListener = listener as ICPPLINTListener;
-			if (typedListener != null) typedListener.ExitLabeledstatement(this);
+			if (typedListener != null) typedListener.ExitCasestatement(this);
+		}
+	}
+	public partial class DefaultstatementContext : LabeledstatementContext {
+		public ITerminalNode Default() { return GetToken(CPPLINTParser.Default, 0); }
+		public ITerminalNode Colon() { return GetToken(CPPLINTParser.Colon, 0); }
+		public StatementContext statement() {
+			return GetRuleContext<StatementContext>(0);
+		}
+		public AttributespecifierseqContext attributespecifierseq() {
+			return GetRuleContext<AttributespecifierseqContext>(0);
+		}
+		public DefaultstatementContext(LabeledstatementContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICPPLINTListener typedListener = listener as ICPPLINTListener;
+			if (typedListener != null) typedListener.EnterDefaultstatement(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICPPLINTListener typedListener = listener as ICPPLINTListener;
+			if (typedListener != null) typedListener.ExitDefaultstatement(this);
 		}
 	}
 
@@ -4363,6 +4407,7 @@ public partial class CPPLINTParser : Parser {
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,84,Context) ) {
 			case 1:
+				_localctx = new GotostatementContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
 				State = 1015;
@@ -4380,6 +4425,7 @@ public partial class CPPLINTParser : Parser {
 				}
 				break;
 			case 2:
+				_localctx = new CasestatementContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
 				State = 1021;
@@ -4398,6 +4444,7 @@ public partial class CPPLINTParser : Parser {
 				}
 				break;
 			case 3:
+				_localctx = new DefaultstatementContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
 				State = 1029;

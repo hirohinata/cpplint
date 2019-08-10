@@ -623,17 +623,47 @@ public partial class CPPLINTBaseListener : ICPPLINTListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitStatement([NotNull] CPPLINTParser.StatementContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="CPPLINTParser.labeledstatement"/>.
+	/// Enter a parse tree produced by the <c>gotostatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.labeledstatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterLabeledstatement([NotNull] CPPLINTParser.LabeledstatementContext context) { }
+	public virtual void EnterGotostatement([NotNull] CPPLINTParser.GotostatementContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="CPPLINTParser.labeledstatement"/>.
+	/// Exit a parse tree produced by the <c>gotostatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.labeledstatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitLabeledstatement([NotNull] CPPLINTParser.LabeledstatementContext context) { }
+	public virtual void ExitGotostatement([NotNull] CPPLINTParser.GotostatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>casestatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.labeledstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCasestatement([NotNull] CPPLINTParser.CasestatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>casestatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.labeledstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCasestatement([NotNull] CPPLINTParser.CasestatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>defaultstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.labeledstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDefaultstatement([NotNull] CPPLINTParser.DefaultstatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>defaultstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.labeledstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDefaultstatement([NotNull] CPPLINTParser.DefaultstatementContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="CPPLINTParser.expressionstatement"/>.
 	/// <para>The default implementation does nothing.</para>
