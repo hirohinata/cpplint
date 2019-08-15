@@ -7,7 +7,7 @@ namespace CppLint
 {
     public class Listener : CPPLINTBaseListener
     {
-        private enum StateType { NoStatement, FallThrough, Break, Switch, Iteration };
+        private enum StateType { NoStatement, FallThrough, Break, Switch, Iteration, IfElse };
         private class State
         {
             public StateType Type { get; set; }
@@ -23,6 +23,55 @@ namespace CppLint
         public override void ExitIterationstatement([NotNull] CPPLINTParser.IterationstatementContext context)
         {
             _stateStack.Pop();
+        }
+
+        public override void ExitIfstatement([NotNull] CPPLINTParser.IfstatementContext context)
+        {
+            if (!_stateStack.TryPeek(out var state)) return;
+            switch (state.Type)
+            {
+                case StateType.NoStatement:
+                case StateType.FallThrough:
+                case StateType.Break:
+                    state.Type = StateType.FallThrough;
+                    break;
+                case StateType.Switch:
+                case StateType.Iteration:
+                case StateType.IfElse:
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        public override void ExitIfelsestatement([NotNull] CPPLINTParser.IfelsestatementContext context)
+        {
+            var elseblock = _stateStack.Pop();
+            var ifblock = _stateStack.Pop();
+            var type = (ifblock.Type == StateType.Break && elseblock.Type == StateType.Break)
+                        ? StateType.Break
+                        : StateType.FallThrough;
+
+            if (!_stateStack.TryPeek(out var state)) return;
+            switch (state.Type)
+            {
+                case StateType.NoStatement:
+                case StateType.FallThrough:
+                case StateType.Break:
+                case StateType.IfElse:
+                    state.Type = type;
+                    break;
+                case StateType.Switch:
+                case StateType.Iteration:
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        public override void EnterIfelseblock([NotNull] CPPLINTParser.IfelseblockContext context)
+        {
+            _stateStack.Push(new State { Type = StateType.IfElse, Token = context.Start });
         }
 
         public override void EnterSwitchstatement([NotNull] CPPLINTParser.SwitchstatementContext context)
@@ -43,6 +92,7 @@ namespace CppLint
                 case StateType.Break:
                     break;
                 case StateType.Iteration:
+                case StateType.IfElse:
                 default:
                     throw new InvalidOperationException();
             }
@@ -61,6 +111,7 @@ namespace CppLint
                 case StateType.Switch:
                     break;
                 case StateType.Iteration:
+                case StateType.IfElse:
                 default:
                     throw new InvalidOperationException();
             }
@@ -80,6 +131,7 @@ namespace CppLint
                 case StateType.Switch:
                     break;
                 case StateType.Iteration:
+                case StateType.IfElse:
                 default:
                     throw new InvalidOperationException();
             }
@@ -100,6 +152,7 @@ namespace CppLint
                     break;
                 case StateType.Switch:
                 case StateType.Iteration:
+                case StateType.IfElse:
                     break;
                 default:
                     throw new InvalidOperationException();
@@ -114,6 +167,7 @@ namespace CppLint
                 case StateType.NoStatement:
                 case StateType.FallThrough:
                 case StateType.Break:
+                case StateType.IfElse:
                     state.Type = StateType.Break;
                     break;
                 case StateType.Switch:

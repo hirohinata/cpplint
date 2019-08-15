@@ -743,6 +743,18 @@ public partial class CPPLINTBaseListener : ICPPLINTListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitSwitchstatement([NotNull] CPPLINTParser.SwitchstatementContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="CPPLINTParser.ifelseblock"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIfelseblock([NotNull] CPPLINTParser.IfelseblockContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="CPPLINTParser.ifelseblock"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIfelseblock([NotNull] CPPLINTParser.IfelseblockContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="CPPLINTParser.condition"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

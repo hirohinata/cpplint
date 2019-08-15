@@ -623,6 +623,16 @@ public interface ICPPLINTListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitSwitchstatement([NotNull] CPPLINTParser.SwitchstatementContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="CPPLINTParser.ifelseblock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIfelseblock([NotNull] CPPLINTParser.IfelseblockContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="CPPLINTParser.ifelseblock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIfelseblock([NotNull] CPPLINTParser.IfelseblockContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="CPPLINTParser.condition"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
