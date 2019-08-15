@@ -13,7 +13,13 @@ namespace CppLint
             public StateType Type { get; set; }
             public IToken Token { get; set; }
         }
-        private Stack<State> _stateStack = new Stack<State>();
+        private readonly Stack<State> _stateStack = new Stack<State>();
+        private readonly List<string> _errorList;
+
+        public Listener(ref List<string> errorList)
+        {
+            _errorList = errorList;
+        }
 
         public override void EnterIterationstatement([NotNull] CPPLINTParser.IterationstatementContext context)
         {
@@ -200,7 +206,7 @@ namespace CppLint
 
         private void FallThroughError(IToken token)
         {
-            Console.WriteLine($"{token.TokenSource.SourceName} ({token.Line},{token.Column}): fall through error");
+            _errorList.Add($"{token.TokenSource.SourceName} ({token.Line},{token.Column}): fall through error");
         }
     }
 }
