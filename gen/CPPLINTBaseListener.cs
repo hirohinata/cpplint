@@ -701,17 +701,47 @@ public partial class CPPLINTBaseListener : ICPPLINTListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitStatementseq([NotNull] CPPLINTParser.StatementseqContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="CPPLINTParser.selectionstatement"/>.
+	/// Enter a parse tree produced by the <c>ifstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterSelectionstatement([NotNull] CPPLINTParser.SelectionstatementContext context) { }
+	public virtual void EnterIfstatement([NotNull] CPPLINTParser.IfstatementContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="CPPLINTParser.selectionstatement"/>.
+	/// Exit a parse tree produced by the <c>ifstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitSelectionstatement([NotNull] CPPLINTParser.SelectionstatementContext context) { }
+	public virtual void ExitIfstatement([NotNull] CPPLINTParser.IfstatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ifelsestatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIfelsestatement([NotNull] CPPLINTParser.IfelsestatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ifelsestatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIfelsestatement([NotNull] CPPLINTParser.IfelsestatementContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>switchstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSwitchstatement([NotNull] CPPLINTParser.SwitchstatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>switchstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSwitchstatement([NotNull] CPPLINTParser.SwitchstatementContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="CPPLINTParser.condition"/>.
 	/// <para>The default implementation does nothing.</para>

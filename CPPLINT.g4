@@ -361,9 +361,9 @@ statementseq
    ;
 
 selectionstatement
-   : If '(' condition ')' statement
-   | If '(' condition ')' statement Else statement
-   | Switch '(' condition ')' statement
+   : If '(' condition ')' statement                 #ifstatement
+   | If '(' condition ')' statement Else statement  #ifelsestatement
+   | Switch '(' condition ')' statement             #switchstatement
    ;
 
 condition

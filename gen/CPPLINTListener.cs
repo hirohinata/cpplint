@@ -587,15 +587,41 @@ public interface ICPPLINTListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitStatementseq([NotNull] CPPLINTParser.StatementseqContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="CPPLINTParser.selectionstatement"/>.
+	/// Enter a parse tree produced by the <c>ifstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterSelectionstatement([NotNull] CPPLINTParser.SelectionstatementContext context);
+	void EnterIfstatement([NotNull] CPPLINTParser.IfstatementContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="CPPLINTParser.selectionstatement"/>.
+	/// Exit a parse tree produced by the <c>ifstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitSelectionstatement([NotNull] CPPLINTParser.SelectionstatementContext context);
+	void ExitIfstatement([NotNull] CPPLINTParser.IfstatementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ifelsestatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIfelsestatement([NotNull] CPPLINTParser.IfelsestatementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ifelsestatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIfelsestatement([NotNull] CPPLINTParser.IfelsestatementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>switchstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSwitchstatement([NotNull] CPPLINTParser.SwitchstatementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>switchstatement</c>
+	/// labeled alternative in <see cref="CPPLINTParser.selectionstatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSwitchstatement([NotNull] CPPLINTParser.SwitchstatementContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="CPPLINTParser.condition"/>.
 	/// </summary>

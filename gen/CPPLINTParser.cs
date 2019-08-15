@@ -4656,6 +4656,18 @@ public partial class CPPLINTParser : Parser {
 	}
 
 	public partial class SelectionstatementContext : ParserRuleContext {
+		public SelectionstatementContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_selectionstatement; } }
+	 
+		public SelectionstatementContext() { }
+		public virtual void CopyFrom(SelectionstatementContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class IfelsestatementContext : SelectionstatementContext {
 		public ITerminalNode If() { return GetToken(CPPLINTParser.If, 0); }
 		public ITerminalNode LeftParen() { return GetToken(CPPLINTParser.LeftParen, 0); }
 		public ConditionContext condition() {
@@ -4669,19 +4681,54 @@ public partial class CPPLINTParser : Parser {
 			return GetRuleContext<StatementContext>(i);
 		}
 		public ITerminalNode Else() { return GetToken(CPPLINTParser.Else, 0); }
-		public ITerminalNode Switch() { return GetToken(CPPLINTParser.Switch, 0); }
-		public SelectionstatementContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_selectionstatement; } }
+		public IfelsestatementContext(SelectionstatementContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICPPLINTListener typedListener = listener as ICPPLINTListener;
-			if (typedListener != null) typedListener.EnterSelectionstatement(this);
+			if (typedListener != null) typedListener.EnterIfelsestatement(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			ICPPLINTListener typedListener = listener as ICPPLINTListener;
-			if (typedListener != null) typedListener.ExitSelectionstatement(this);
+			if (typedListener != null) typedListener.ExitIfelsestatement(this);
+		}
+	}
+	public partial class IfstatementContext : SelectionstatementContext {
+		public ITerminalNode If() { return GetToken(CPPLINTParser.If, 0); }
+		public ITerminalNode LeftParen() { return GetToken(CPPLINTParser.LeftParen, 0); }
+		public ConditionContext condition() {
+			return GetRuleContext<ConditionContext>(0);
+		}
+		public ITerminalNode RightParen() { return GetToken(CPPLINTParser.RightParen, 0); }
+		public StatementContext statement() {
+			return GetRuleContext<StatementContext>(0);
+		}
+		public IfstatementContext(SelectionstatementContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICPPLINTListener typedListener = listener as ICPPLINTListener;
+			if (typedListener != null) typedListener.EnterIfstatement(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICPPLINTListener typedListener = listener as ICPPLINTListener;
+			if (typedListener != null) typedListener.ExitIfstatement(this);
+		}
+	}
+	public partial class SwitchstatementContext : SelectionstatementContext {
+		public ITerminalNode Switch() { return GetToken(CPPLINTParser.Switch, 0); }
+		public ITerminalNode LeftParen() { return GetToken(CPPLINTParser.LeftParen, 0); }
+		public ConditionContext condition() {
+			return GetRuleContext<ConditionContext>(0);
+		}
+		public ITerminalNode RightParen() { return GetToken(CPPLINTParser.RightParen, 0); }
+		public StatementContext statement() {
+			return GetRuleContext<StatementContext>(0);
+		}
+		public SwitchstatementContext(SelectionstatementContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICPPLINTListener typedListener = listener as ICPPLINTListener;
+			if (typedListener != null) typedListener.EnterSwitchstatement(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICPPLINTListener typedListener = listener as ICPPLINTListener;
+			if (typedListener != null) typedListener.ExitSwitchstatement(this);
 		}
 	}
 
@@ -4694,6 +4741,7 @@ public partial class CPPLINTParser : Parser {
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,88,Context) ) {
 			case 1:
+				_localctx = new IfstatementContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
 				State = 1057; Match(If);
@@ -4704,6 +4752,7 @@ public partial class CPPLINTParser : Parser {
 				}
 				break;
 			case 2:
+				_localctx = new IfelsestatementContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
 				State = 1063; Match(If);
@@ -4716,6 +4765,7 @@ public partial class CPPLINTParser : Parser {
 				}
 				break;
 			case 3:
+				_localctx = new SwitchstatementContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
 				State = 1071; Match(Switch);
