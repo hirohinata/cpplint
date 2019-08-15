@@ -373,10 +373,10 @@ condition
    ;
 
 iterationstatement
-   : While '(' condition ')' statement
-   | Do statement While '(' expression ')' ';'
-   | For '(' forinitstatement condition? ';' expression? ')' statement
-   | For '(' forrangedeclaration ':' forrangeinitializer ')' statement
+   : type=While '(' condition ')' statement
+   | type=Do statement While '(' expression ')' ';'
+   | type=For '(' forinitstatement condition? ';' expression? ')' statement
+   | type=For '(' forrangedeclaration ':' forrangeinitializer ')' statement
    ;
 
 forinitstatement

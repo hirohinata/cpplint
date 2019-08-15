@@ -4887,7 +4887,7 @@ public partial class CPPLINTParser : Parser {
 	}
 
 	public partial class IterationstatementContext : ParserRuleContext {
-		public ITerminalNode While() { return GetToken(CPPLINTParser.While, 0); }
+		public IToken type;
 		public ITerminalNode LeftParen() { return GetToken(CPPLINTParser.LeftParen, 0); }
 		public ConditionContext condition() {
 			return GetRuleContext<ConditionContext>(0);
@@ -4896,15 +4896,16 @@ public partial class CPPLINTParser : Parser {
 		public StatementContext statement() {
 			return GetRuleContext<StatementContext>(0);
 		}
-		public ITerminalNode Do() { return GetToken(CPPLINTParser.Do, 0); }
+		public ITerminalNode While() { return GetToken(CPPLINTParser.While, 0); }
 		public ExpressionContext expression() {
 			return GetRuleContext<ExpressionContext>(0);
 		}
 		public ITerminalNode Semi() { return GetToken(CPPLINTParser.Semi, 0); }
-		public ITerminalNode For() { return GetToken(CPPLINTParser.For, 0); }
+		public ITerminalNode Do() { return GetToken(CPPLINTParser.Do, 0); }
 		public ForinitstatementContext forinitstatement() {
 			return GetRuleContext<ForinitstatementContext>(0);
 		}
+		public ITerminalNode For() { return GetToken(CPPLINTParser.For, 0); }
 		public ForrangedeclarationContext forrangedeclaration() {
 			return GetRuleContext<ForrangedeclarationContext>(0);
 		}
@@ -4939,7 +4940,7 @@ public partial class CPPLINTParser : Parser {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 1097; Match(While);
+				State = 1097; _localctx.type = Match(While);
 				State = 1098; Match(LeftParen);
 				State = 1099; condition();
 				State = 1100; Match(RightParen);
@@ -4949,7 +4950,7 @@ public partial class CPPLINTParser : Parser {
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 1103; Match(Do);
+				State = 1103; _localctx.type = Match(Do);
 				State = 1104; statement();
 				State = 1105; Match(While);
 				State = 1106; Match(LeftParen);
@@ -4961,7 +4962,7 @@ public partial class CPPLINTParser : Parser {
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 1111; Match(For);
+				State = 1111; _localctx.type = Match(For);
 				State = 1112; Match(LeftParen);
 				State = 1113; forinitstatement();
 				State = 1115;
@@ -4990,7 +4991,7 @@ public partial class CPPLINTParser : Parser {
 			case 4:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 1124; Match(For);
+				State = 1124; _localctx.type = Match(For);
 				State = 1125; Match(LeftParen);
 				State = 1126; forrangedeclaration();
 				State = 1127; Match(Colon);

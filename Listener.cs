@@ -7,7 +7,7 @@ namespace CppLint
 {
     public class Listener : CPPLINTBaseListener
     {
-        private enum StateType { NoStatement, FallThrough, Break, Switch };
+        private enum StateType { NoStatement, FallThrough, Break, Switch, Iteration };
         private class State
         {
             public StateType Type { get; set; }
@@ -15,8 +15,14 @@ namespace CppLint
         }
         private Stack<State> _stateStack = new Stack<State>();
 
-        public Listener()
+        public override void EnterIterationstatement([NotNull] CPPLINTParser.IterationstatementContext context)
         {
+            _stateStack.Push(new State { Type = StateType.Iteration, Token = context.type });
+        }
+
+        public override void ExitIterationstatement([NotNull] CPPLINTParser.IterationstatementContext context)
+        {
+            _stateStack.Pop();
         }
 
         public override void EnterSwitchstatement([NotNull] CPPLINTParser.SwitchstatementContext context)
@@ -36,6 +42,9 @@ namespace CppLint
                 case StateType.NoStatement:
                 case StateType.Break:
                     break;
+                case StateType.Iteration:
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
@@ -51,6 +60,9 @@ namespace CppLint
                 case StateType.Break:
                 case StateType.Switch:
                     break;
+                case StateType.Iteration:
+                default:
+                    throw new InvalidOperationException();
             }
             _stateStack.Push(new State { Type = StateType.NoStatement, Token = context.Case().Symbol });
         }
@@ -67,6 +79,9 @@ namespace CppLint
                 case StateType.Break:
                 case StateType.Switch:
                     break;
+                case StateType.Iteration:
+                default:
+                    throw new InvalidOperationException();
             }
             _stateStack.Push(new State { Type = StateType.NoStatement, Token = context.Default().Symbol });
         }
@@ -84,7 +99,10 @@ namespace CppLint
                     state.Type = StateType.FallThrough;
                     break;
                 case StateType.Switch:
+                case StateType.Iteration:
                     break;
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
@@ -99,7 +117,10 @@ namespace CppLint
                     state.Type = StateType.Break;
                     break;
                 case StateType.Switch:
+                case StateType.Iteration:
                     break;
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
