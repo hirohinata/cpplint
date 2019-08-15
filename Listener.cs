@@ -178,6 +178,26 @@ namespace CppLint
             }
         }
 
+        public override void EnterAttributespecifier([NotNull] CPPLINTParser.AttributespecifierContext context)
+        {
+            if (!string.Equals(context.GetText(), "[[fallthrough]]")) return;
+            if (!_stateStack.TryPeek(out var state)) return;
+            switch (state.Type)
+            {
+                case StateType.NoStatement:
+                case StateType.FallThrough:
+                case StateType.Break:
+                case StateType.IfElse:
+                    state.Type = StateType.Break;
+                    break;
+                case StateType.Switch:
+                case StateType.Iteration:
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
         private void FallThroughError(IToken token)
         {
             Console.WriteLine($"{token.TokenSource.SourceName} ({token.Line},{token.Column}): fall through error");
